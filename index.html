@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Untuk Tinaa - Just Friend ❤️</title>
+    <title>Untuk Tina - Mesra Banget ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,67 +14,70 @@
         }
 
         body {
+            font-family: 'Poppins', system-ui, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(145deg, #1e3c72, #ff69b4, #000000, #8b4513, #ff0000);
-            background-size: 300% 300%;
-            animation: bgShift 15s ease infinite;
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            perspective: 1000px;
+            background: radial-gradient(circle at 10% 30%, #1e3c72, #2b1e4a, #ff4d6d, #8b4513);
+            background-size: 200% 200%;
+            animation: bgWave 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            perspective: 1200px;
             overflow-x: hidden;
             position: relative;
         }
 
-        @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes bgWave {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
-        /* Efek hujan */
-        .rain {
+        /* Hujan love & emoji */
+        .rain-emoji {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
-        .rain-drop {
+        .rain-emoji span {
             position: absolute;
-            background: rgba(255,255,255,0.4);
-            width: 2px;
-            height: 15px;
+            font-size: 1.5rem;
             animation: fall linear infinite;
+            opacity: 0.7;
         }
         @keyframes fall {
             to { transform: translateY(100vh); }
         }
 
-        /* Card utama 3D */
+        /* Kartu utama mewah 3D */
         .card {
             position: relative;
             z-index: 10;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(15px);
-            border-radius: 60px;
-            padding: 25px;
-            max-width: 550px;
-            width: 90%;
-            margin: 20px auto;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 70px;
+            padding: 30px 25px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
             transform-style: preserve-3d;
             transform: rotateX(2deg) rotateY(2deg);
-            transition: transform 0.2s ease;
         }
 
+        /* Page transisi smooth */
         .page {
-            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .page.fade-out {
             opacity: 0;
-            transform: scale(0.96) translateY(15px);
+            transform: scale(0.96) translateY(20px);
             pointer-events: none;
         }
         .page.fade-in {
@@ -84,42 +88,60 @@
             display: none;
         }
 
-        /* Tombol */
+        /* Tombol besar di tengah */
         .btn {
-            background: linear-gradient(90deg, #ff69b4, #1e90ff);
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #1e90ff);
             border: none;
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            color: white;
+            padding: 16px 40px;
+            font-size: 1.4rem;
             font-weight: bold;
+            border-radius: 60px;
+            color: white;
             cursor: pointer;
-            margin: 20px auto;
-            display: inline-block;
+            display: block;
+            margin: 30px auto 20px;
+            width: fit-content;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+            text-align: center;
         }
         .btn:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Amplop */
+        /* Stiker bergerak */
+        .sticker {
+            display: inline-block;
+            font-size: 2.2rem;
+            margin: 5px;
+            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.3));
+            animation: floatSticker 2s infinite alternate;
+        }
+        @keyframes floatSticker {
+            from { transform: translateY(0px) rotate(0deg); }
+            to { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Amplop mewah */
         .envelope-area {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         .envelope {
-            width: 260px;
-            height: 170px;
+            width: 280px;
+            height: 180px;
             background: #f4a460;
             position: relative;
-            border-radius: 18px;
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
             transition: transform 0.2s;
         }
-        .envelope:hover { transform: scale(1.02); }
+        .envelope:hover {
+            transform: scale(1.02);
+        }
         .flap {
             position: absolute;
             top: 0;
@@ -128,44 +150,58 @@
             height: 100%;
             background: #d2691e;
             clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
-            transition: transform 0.6s;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: top;
-            border-radius: 18px 18px 0 0;
+            border-radius: 20px 20px 0 0;
         }
         .envelope.open .flap {
             transform: rotateX(180deg);
         }
 
-        /* Animasi loading 5 detik */
-        .loader {
-            width: 80px;
-            height: 80px;
-            margin: 20px auto;
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #ff69b4;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        /* Animasi stiker untuk buka surat (2 detik) */
+        .sticker-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            font-size: 2rem;
+            animation: burstAnim 0.8s ease-out forwards;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes burstAnim {
+            0% { transform: scale(0.2) rotate(0deg); opacity: 1; }
+            80% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0; visibility: hidden; }
+        }
+        .sticker-float {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            font-size: 2rem;
+            animation: floatAnim 2s ease-in-out forwards;
+        }
+        @keyframes floatAnim {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-200px) rotate(360deg); opacity: 0; }
         }
 
-        /* Kotak kado */
+        /* Kotak kado premium */
         .gift-box {
-            width: 180px;
-            height: 180px;
-            background: #c71585;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(145deg, #ffb347, #ff7e05);
             margin: 20px auto;
             position: relative;
-            border-radius: 15px;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
         }
-        .gift-box::before {
+        .gift-box::after {
             content: "🎁";
-            font-size: 4rem;
+            font-size: 5rem;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -173,21 +209,23 @@
         }
         .gift-box.open {
             transform: scale(1.05);
+            background: #ffd966;
         }
 
-        /* Foto */
+        /* Foto dengan bingkai mewah */
         .photo {
             width: 100%;
-            max-width: 300px;
-            border-radius: 30px;
+            max-width: 320px;
+            border-radius: 40px;
             margin: 15px auto;
             display: block;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+            border: 3px solid white;
         }
 
-        /* Beruang peluk love */
+        /* Beruang + love interaktif */
         .bear-love {
-            font-size: 8rem;
+            font-size: 7rem;
             cursor: pointer;
             display: inline-block;
             margin: 20px;
@@ -196,113 +234,168 @@
         }
         @keyframes bounce {
             0%,100%{ transform: translateY(0); }
-            50%{ transform: translateY(-10px); }
+            50%{ transform: translateY(-12px); }
         }
 
-        /* Animasi 3D keren (rotating heart) */
+        /* Love 3D keren */
         .heart-3d {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center;
             background-size: contain;
             margin: 20px auto;
             animation: rotate3d 2s infinite;
+            filter: drop-shadow(0 0 15px red);
         }
         @keyframes rotate3d {
             0% { transform: rotateY(0deg); }
             100% { transform: rotateY(360deg); }
         }
 
-        /* Music button */
+        .message-box {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            border-radius: 50px;
+            margin: 20px 0;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
         .music-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
-            padding: 10px 18px;
-            border-radius: 40px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            padding: 12px 22px;
+            border-radius: 50px;
             color: white;
             cursor: pointer;
-            z-index: 100;
+            z-index: 1000;
             font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="rain" id="rain"></div>
+
+<div class="rain-emoji" id="rainEmoji"></div>
 
 <div class="card" id="mainCard">
     <!-- Page 1: Welcome -->
-    <div id="page1" class="page">
-        <h1 style="color:white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">✨ wellcome tinaa sayang ✨</h1>
+    <div id="page1" class="page" style="text-align: center;">
+        <div>
+            <span class="sticker">🐼💖</span>
+            <span class="sticker">🌸🌼</span>
+            <span class="sticker">💌✨</span>
+            <span class="sticker">😘🥰</span>
+        </div>
+        <h1 style="color: white; font-size: 2rem; margin: 20px 0; text-shadow: 2px 2px 8px black;">✨ wellcome tinaa sayang ✨</h1>
+        <div>
+            <span class="sticker">🫶💕</span>
+            <span class="sticker">🐣💛</span>
+            <span class="sticker">💋❤️</span>
+        </div>
         <button id="next1" class="btn">📬 Next 📬</button>
     </div>
 
     <!-- Page 2: Amplop -->
-    <div id="page2" class="page hidden">
+    <div id="page2" class="page hidden" style="text-align: center;">
+        <div>
+            <span class="sticker">💌✨</span>
+            <span class="sticker">📦🎁</span>
+            <span class="sticker">💘💖</span>
+        </div>
         <div class="envelope-area">
             <div id="envelope" class="envelope">
                 <div class="flap"></div>
             </div>
         </div>
-        <div id="openEnvelopeBtn" class="btn">💌 buka ini ya sayang 💌</div>
-        <div id="loadingAnim" style="display:none;">
-            <div class="loader"></div>
-            <p style="color:white;">Sedang membuka surat...</p>
-        </div>
-        <div id="letterContent" style="display:none; color:white; background: rgba(0,0,0,0.6); padding:15px; border-radius:30px; margin-top:20px;">
-            <p>ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
+        <div id="openEnvelopeBtn" class="btn" style="margin-top: 10px;">💌 buka ini ya sayang 💌</div>
+        <!-- Animasi stiker 2 detik, tanpa loading text -->
+        <div id="stickerAnimation" style="display:none; position: relative; min-height: 100px;"></div>
+        <div id="letterContent" style="display:none;">
+            <div class="message-box">
+                <span class="sticker">📜💌</span> <span class="sticker">🐼💕</span>
+                <p>ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
+                <span class="sticker">😘💖</span> <span class="sticker">🌸🌺</span>
+            </div>
             <button id="next2" class="btn">✨ Next ✨</button>
         </div>
     </div>
 
     <!-- Page 3: Kotak kado + foto -->
-    <div id="page3" class="page hidden">
+    <div id="page3" class="page hidden" style="text-align: center;">
+        <div>
+            <span class="sticker">🎀🎁</span>
+            <span class="sticker">💝💕</span>
+        </div>
         <div id="giftBox" class="gift-box"></div>
         <div id="photoContainer" style="display:none;">
             <img src="foto.jpg" alt="Foto Tina" class="photo" id="tinaPhoto" onerror="this.src='https://placehold.co/400x400?text=Foto+Tina'">
-            <p style="color:white; margin-top:10px;">cantik banget sih just friend akuuu 😍</p>
+            <div class="message-box">cantik banget sih just friend akuuu 😍💖</div>
             <button id="next3" class="btn">✨ Next ✨</button>
         </div>
     </div>
 
     <!-- Page 4: Beruang peluk love -->
-    <div id="page4" class="page hidden">
+    <div id="page4" class="page hidden" style="text-align: center;">
+        <div>
+            <span class="sticker">🐻‍❄️❤️</span>
+            <span class="sticker">🧸💕</span>
+        </div>
         <div class="bear-love" id="bearLove">🐻‍❄️❤️</div>
-        <div id="bearMessage" style="display:none; color:white; background:rgba(0,0,0,0.6); border-radius:30px; padding:15px; margin-top:20px;">
-            <p>lucuu banget kayaa kamu</p>
+        <div id="bearMessage" style="display:none;">
+            <div class="message-box">lucuu banget kayaa kamu 🥰🐻‍❄️</div>
             <button id="bearNext" class="btn">💖 buka lagi sayang 💖</button>
         </div>
-        <div id="secondMessage" style="display:none; margin-top:20px;">
-            <p style="color:white;">dari Ganny untuk just friend aku tina</p>
+        <div id="secondMessage" style="display:none;">
+            <div class="message-box">dari Ganny untuk just friend aku tina 💌✨</div>
             <button id="secondNext" class="btn">💕 plis buka lagi sayang 💕</button>
         </div>
         <div id="anim3dContainer" style="display:none;">
             <div class="heart-3d"></div>
-            <p id="finalText" style="color:white; margin-top:20px; display:none;">Yeayy selesai sayangg 🎉</p>
+            <p id="finalText" style="color:white; margin-top:20px; font-weight:bold; display:none;">Yeayy selesai sayangg 🎉💖</p>
         </div>
     </div>
 </div>
 
-<div class="music-btn" id="musicControl">🎵 Audio 🎵 <span id="musicIcon">🔊</span></div>
+<div class="music-btn" id="musicControl">
+    🎵 Audio 🎵 <span id="musicIcon">🔊</span>
+</div>
 <audio id="bgMusic" src="myheart.mp3" preload="auto" loop></audio>
 
 <script>
-    // ==================== EFEK HUJAN ====================
-    function createRain() {
-        const rainContainer = document.getElementById('rain');
-        for (let i = 0; i < 150; i++) {
-            let drop = document.createElement('div');
-            drop.classList.add('rain-drop');
+    // ==================== HUJAN EMOJI ====================
+    function startRain() {
+        const rainContainer = document.getElementById('rainEmoji');
+        const emojis = ['❤️', '💖', '🌸', '🐼', '💕', '✨', '⭐', '🌹', '😘', '🎀'];
+        for (let i = 0; i < 120; i++) {
+            let drop = document.createElement('span');
+            drop.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             drop.style.left = Math.random() * 100 + '%';
-            drop.style.animationDuration = Math.random() * 1.5 + 0.5 + 's';
-            drop.style.animationDelay = Math.random() * 2 + 's';
+            drop.style.animationDuration = Math.random() * 3 + 2 + 's';
+            drop.style.animationDelay = Math.random() * 5 + 's';
+            drop.style.fontSize = Math.random() * 24 + 16 + 'px';
             drop.style.opacity = Math.random() * 0.6 + 0.2;
             rainContainer.appendChild(drop);
         }
     }
-    createRain();
+    startRain();
 
     // ==================== MUSIK ====================
     const bgMusic = document.getElementById('bgMusic');
@@ -330,8 +423,8 @@
             setTimeout(() => {
                 to.classList.remove('fade-in');
                 if (callback) callback();
-            }, 500);
-        }, 500);
+            }, 600);
+        }, 600);
     }
 
     // Page 1 -> 2
@@ -342,19 +435,51 @@
         transitionToPage(page1, page2);
     });
 
-    // Amplop buka dengan animasi 5 detik
+    // ==================== BUKA AMPLOP DENGAN ANIMASI STIKER 2 DETIK ====================
     const envelope = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeBtn');
-    const loadingDiv = document.getElementById('loadingAnim');
+    const stickerAnimDiv = document.getElementById('stickerAnimation');
     const letterDiv = document.getElementById('letterContent');
+
+    function showStickerAnimation() {
+        stickerAnimDiv.style.display = 'block';
+        stickerAnimDiv.innerHTML = '';
+        const emojiList = ['❤️', '💖', '🌸', '🐼', '💕', '✨', '⭐', '🌹', '😘', '🎀', '🐣', '💌', '🎁', '💘'];
+        // Buat banyak stiker yang muncul dan bergerak
+        for (let i = 0; i < 40; i++) {
+            const sticker = document.createElement('div');
+            sticker.className = 'sticker-burst';
+            sticker.innerHTML = emojiList[Math.floor(Math.random() * emojiList.length)];
+            sticker.style.left = Math.random() * 80 + 10 + '%';
+            sticker.style.top = Math.random() * 80 + 10 + '%';
+            sticker.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            sticker.style.animationDuration = (Math.random() * 0.8 + 0.5) + 's';
+            sticker.style.animationDelay = Math.random() * 0.5 + 's';
+            stickerAnimDiv.appendChild(sticker);
+        }
+        // Tambah beberapa sticker yang terbang ke atas
+        for (let i = 0; i < 30; i++) {
+            const fly = document.createElement('div');
+            fly.className = 'sticker-float';
+            fly.innerHTML = emojiList[Math.floor(Math.random() * emojiList.length)];
+            fly.style.left = Math.random() * 100 + '%';
+            fly.style.bottom = '0px';
+            fly.style.fontSize = (Math.random() * 28 + 18) + 'px';
+            fly.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
+            fly.style.animationDelay = Math.random() * 0.3 + 's';
+            stickerAnimDiv.appendChild(fly);
+        }
+        setTimeout(() => {
+            stickerAnimDiv.style.display = 'none';
+            stickerAnimDiv.innerHTML = '';
+            letterDiv.style.display = 'block';
+        }, 2000); // 2 detik
+    }
+
     openBtn.addEventListener('click', () => {
         envelope.classList.add('open');
         openBtn.style.display = 'none';
-        loadingDiv.style.display = 'block';
-        setTimeout(() => {
-            loadingDiv.style.display = 'none';
-            letterDiv.style.display = 'block';
-        }, 5000); // 5 detik animasi keren (loader)
+        showStickerAnimation();
     });
 
     // Page 2 -> 3
@@ -363,7 +488,7 @@
         transitionToPage(page2, page3);
     });
 
-    // Kotak kado buka, tampilkan foto
+    // Buka kotak kado
     const giftBox = document.getElementById('giftBox');
     const photoContainer = document.getElementById('photoContainer');
     giftBox.addEventListener('click', () => {
@@ -380,7 +505,7 @@
         transitionToPage(page3, page4);
     });
 
-    // Beruang peluk love
+    // Beruang love
     const bearLove = document.getElementById('bearLove');
     const bearMessageDiv = document.getElementById('bearMessage');
     bearLove.addEventListener('click', () => {
@@ -401,23 +526,22 @@
     document.getElementById('secondNext').addEventListener('click', () => {
         secondMsgDiv.style.display = 'none';
         anim3d.style.display = 'block';
-        // Simulasi animasi 3D selama 3 detik lalu tampilkan selesai
         setTimeout(() => {
             finalTextSpan.style.display = 'block';
         }, 3000);
     });
 
-    // Efek hover 3D pada card
+    // Efek 3D card mengikuti gerakan mouse
     const card = document.querySelector('.card');
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `rotateX(${y * 5}deg) rotateY(${x * 5}deg)`;
+        card.style.transform = `rotateX(${y * 6}deg) rotateY(${x * 6}deg)`;
     });
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'rotateX(2deg) rotateY(2deg)';
     });
 </script>
 </body>
-  </html>
+    </html>
