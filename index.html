@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Untuk Tina - Buku Cinta ❤️</title>
+    <title>Untuk Tina - Mulus ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -23,17 +23,16 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            perspective: 1500px;
             overflow-x: hidden;
         }
 
         @keyframes bgWave {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Hujan emoji versi ringan */
+        /* Hujan emoji ringan (30 butir) */
         .rain-emoji {
             position: fixed;
             top: 0;
@@ -47,46 +46,44 @@
             position: absolute;
             font-size: 1.2rem;
             animation: fall linear infinite;
-            opacity: 0.5;
+            opacity: 0.4;
+            will-change: transform;
         }
         @keyframes fall {
             to { transform: translateY(100vh); }
         }
 
-        /* Kartu buku 3D */
-        .book-card {
+        /* Kartu utama */
+        .card {
             position: relative;
             z-index: 10;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        /* Efek flip buku */
-        .book-card.flip {
-            transform: rotateY(180deg);
-        }
-
-        .card-inner {
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(20px);
             border-radius: 70px;
             padding: 30px 25px;
+            max-width: 600px;
             width: 100%;
             box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.3);
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
+            transition: transform 0.2s ease;
         }
 
-        /* Halaman */
+        /* Transisi halaman dengan fade + slide halus (tanpa 3D berat) */
         .page {
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: opacity, transform;
         }
         .page.hidden {
             display: none;
+        }
+        .fade-out {
+            opacity: 0 !important;
+            transform: translateY(15px) scale(0.98) !important;
+            pointer-events: none;
+        }
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
         }
 
         /* Tombol di tengah */
@@ -103,7 +100,8 @@
             margin: 30px auto 20px;
             width: fit-content;
             box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            will-change: transform;
         }
         .btn:active {
             transform: scale(0.96);
@@ -120,10 +118,10 @@
         }
         @keyframes floatSticker {
             from { transform: translateY(0px) rotate(0deg); }
-            to { transform: translateY(-8px) rotate(4deg); }
+            to { transform: translateY(-8px) rotate(3deg); }
         }
 
-        /* Amplop mewah */
+        /* Amplop */
         .envelope-area {
             display: flex;
             justify-content: center;
@@ -148,7 +146,7 @@
             height: 100%;
             background: #d2691e;
             clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s ease;
             transform-origin: top;
             border-radius: 20px 20px 0 0;
         }
@@ -157,28 +155,27 @@
         }
 
         /* Animasi stiker untuk buka surat (2 detik) */
-        .sticker-burst {
+        .sticker-burst, .sticker-float {
             position: fixed;
             pointer-events: none;
-            z-index: 1000;
-            font-size: 1.8rem;
-            animation: burstAnim 0.8s ease-out forwards;
+            z-index: 2000;
+            font-size: 1.6rem;
+            will-change: transform, opacity;
+        }
+        .sticker-burst {
+            animation: burstAnim 0.6s ease-out forwards;
         }
         @keyframes burstAnim {
             0% { transform: scale(0.2) rotate(0deg); opacity: 1; }
             80% { transform: scale(1.2) rotate(15deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 0; visibility: hidden; }
+            100% { transform: scale(0.8) rotate(0deg); opacity: 0; visibility: hidden; }
         }
         .sticker-float {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1000;
-            font-size: 1.8rem;
-            animation: floatAnim 2s ease-in-out forwards;
+            animation: floatAnim 1.5s ease-in-out forwards;
         }
         @keyframes floatAnim {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-120px) rotate(360deg); opacity: 0; visibility: hidden; }
         }
 
         /* Kotak kado */
@@ -191,11 +188,7 @@
             border-radius: 25px;
             cursor: pointer;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            transition: transform 0.2s, opacity 0.2s;
         }
         .gift-box::after {
             content: "🎁";
@@ -226,6 +219,7 @@
             display: inline-block;
             margin: 20px;
             animation: bounce 1s infinite;
+            will-change: transform;
         }
         @keyframes bounce {
             0%,100%{ transform: translateY(0); }
@@ -285,74 +279,72 @@
 <body>
 <div class="rain-emoji" id="rainEmoji"></div>
 
-<div class="book-card" id="bookCard">
-    <div class="card-inner">
-        <!-- Page 1: Welcome -->
-        <div id="page1" class="page" style="text-align: center;">
-            <div>
-                <span class="sticker">🐼💖</span>
-                <span class="sticker">🌸🌼</span>
-                <span class="sticker">💌✨</span>
-                <span class="sticker">😘🥰</span>
-            </div>
-            <h1 style="color: white; font-size: 2rem; margin: 20px 0;">✨ wellcome tinaa sayang ✨</h1>
-            <div>
-                <span class="sticker">🫶💕</span>
-                <span class="sticker">🐣💛</span>
-                <span class="sticker">💋❤️</span>
-            </div>
-            <button id="next1" class="btn">📬 Next 📬</button>
+<div class="card" id="mainCard">
+    <!-- Page 1: Welcome -->
+    <div id="page1" class="page" style="text-align: center; opacity: 1; transform: translateY(0);">
+        <div>
+            <span class="sticker">🐼💖</span>
+            <span class="sticker">🌸🌼</span>
+            <span class="sticker">💌✨</span>
+            <span class="sticker">😘🥰</span>
         </div>
-
-        <!-- Page 2: Amplop -->
-        <div id="page2" class="page hidden" style="text-align: center;">
-            <div>
-                <span class="sticker">💌✨</span>
-                <span class="sticker">📦🎁</span>
-                <span class="sticker">💘💖</span>
-            </div>
-            <div class="envelope-area">
-                <div id="envelope" class="envelope"><div class="flap"></div></div>
-            </div>
-            <div id="openEnvelopeBtn" class="btn">💌 buka ini ya sayang 💌</div>
-            <div id="stickerAnimation" style="display:none; min-height: 80px;"></div>
-            <div id="letterContent" style="display:none;">
-                <div class="message-box">
-                    <span class="sticker">📜💌</span> <span class="sticker">🐼💕</span>
-                    <p>ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
-                    <span class="sticker">😘💖</span> <span class="sticker">🌸🌺</span>
-                </div>
-                <button id="next2" class="btn">✨ Next ✨</button>
-            </div>
+        <h1 style="color: white; font-size: 2rem; margin: 20px 0;">✨ wellcome tinaa sayang ✨</h1>
+        <div>
+            <span class="sticker">🫶💕</span>
+            <span class="sticker">🐣💛</span>
+            <span class="sticker">💋❤️</span>
         </div>
+        <button id="next1" class="btn">📬 Next 📬</button>
+    </div>
 
-        <!-- Page 3: Kotak kado -->
-        <div id="page3" class="page hidden" style="text-align: center;">
-            <div><span class="sticker">🎀🎁</span><span class="sticker">💝💕</span></div>
-            <div id="giftBox" class="gift-box"></div>
-            <div id="photoContainer" style="display:none;">
-                <img src="foto.jpg" alt="Foto Tina" class="photo" onerror="this.src='https://placehold.co/400x400?text=Foto+Tina'">
-                <div class="message-box">cantik banget sih just friend akuuu 😍💖</div>
-                <button id="next3" class="btn">✨ Next ✨</button>
-            </div>
+    <!-- Page 2: Amplop -->
+    <div id="page2" class="page hidden" style="text-align: center;">
+        <div>
+            <span class="sticker">💌✨</span>
+            <span class="sticker">📦🎁</span>
+            <span class="sticker">💘💖</span>
         </div>
+        <div class="envelope-area">
+            <div id="envelope" class="envelope"><div class="flap"></div></div>
+        </div>
+        <div id="openEnvelopeBtn" class="btn">💌 buka ini ya sayang 💌</div>
+        <div id="stickerAnimation" style="display:none; min-height: 80px;"></div>
+        <div id="letterContent" style="display:none;">
+            <div class="message-box">
+                <span class="sticker">📜💌</span> <span class="sticker">🐼💕</span>
+                <p>ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
+                <span class="sticker">😘💖</span> <span class="sticker">🌸🌺</span>
+            </div>
+            <button id="next2" class="btn">✨ Next ✨</button>
+        </div>
+    </div>
 
-        <!-- Page 4: Beruang love -->
-        <div id="page4" class="page hidden" style="text-align: center;">
-            <div><span class="sticker">🐻‍❄️❤️</span><span class="sticker">🧸💕</span></div>
-            <div class="bear-love" id="bearLove">🐻‍❄️❤️</div>
-            <div id="bearMessage" style="display:none;">
-                <div class="message-box">lucuu banget kayaa kamu 🥰🐻‍❄️</div>
-                <button id="bearNext" class="btn">💖 buka lagi sayang 💖</button>
-            </div>
-            <div id="secondMessage" style="display:none;">
-                <div class="message-box">dari Ganny untuk just friend aku tina 💌✨</div>
-                <button id="secondNext" class="btn">💕 plis buka lagi sayang 💕</button>
-            </div>
-            <div id="anim3dContainer" style="display:none;">
-                <div class="heart-3d"></div>
-                <p id="finalText" style="color:white; margin-top:20px; display:none;">Yeayy selesai sayangg 🎉💖</p>
-            </div>
+    <!-- Page 3: Kotak kado -->
+    <div id="page3" class="page hidden" style="text-align: center;">
+        <div><span class="sticker">🎀🎁</span><span class="sticker">💝💕</span></div>
+        <div id="giftBox" class="gift-box"></div>
+        <div id="photoContainer" style="display:none;">
+            <img src="foto.jpg" alt="Foto Tina" class="photo" onerror="this.src='https://placehold.co/400x400?text=Foto+Tina'">
+            <div class="message-box">cantik banget sih just friend akuuu 😍💖</div>
+            <button id="next3" class="btn">✨ Next ✨</button>
+        </div>
+    </div>
+
+    <!-- Page 4: Beruang love -->
+    <div id="page4" class="page hidden" style="text-align: center;">
+        <div><span class="sticker">🐻‍❄️❤️</span><span class="sticker">🧸💕</span></div>
+        <div class="bear-love" id="bearLove">🐻‍❄️❤️</div>
+        <div id="bearMessage" style="display:none;">
+            <div class="message-box">lucuu banget kayaa kamu 🥰🐻‍❄️</div>
+            <button id="bearNext" class="btn">💖 buka lagi sayang 💖</button>
+        </div>
+        <div id="secondMessage" style="display:none;">
+            <div class="message-box">dari Ganny untuk just friend aku tina 💌✨</div>
+            <button id="secondNext" class="btn">💕 plis buka lagi sayang 💕</button>
+        </div>
+        <div id="anim3dContainer" style="display:none;">
+            <div class="heart-3d"></div>
+            <p id="finalText" style="color:white; margin-top:20px; display:none;">Yeayy selesai sayangg 🎉💖</p>
         </div>
     </div>
 </div>
@@ -364,10 +356,10 @@
 
 <script>
     (function(){
-        // Hujan emoji ringan (50 butir)
+        // Hujan emoji ringan (30 butir)
         const rainContainer = document.getElementById('rainEmoji');
         const emojis = ['❤️','💖','🌸','🐼','💕','✨','🌹','😘','🎀'];
-        for(let i=0;i<50;i++){
+        for(let i=0;i<30;i++){
             let drop = document.createElement('span');
             drop.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
             drop.style.left = Math.random()*100+'%';
@@ -394,7 +386,6 @@
         document.getElementById('musicControl').addEventListener('click', toggleMusic);
 
         // Elemen
-        const bookCard = document.getElementById('bookCard');
         const page1 = document.getElementById('page1');
         const page2 = document.getElementById('page2');
         const page3 = document.getElementById('page3');
@@ -414,71 +405,67 @@
         const anim3d = document.getElementById('anim3dContainer');
         const finalTextSpan = document.getElementById('finalText');
 
-        // Fungsi flip buku (animasi membuka halaman)
-        let isFlipping = false;
-        function flipToPage(currentPage, nextPage, callback){
-            if(isFlipping) return;
-            isFlipping = true;
-            bookCard.classList.add('flip');
+        // Fungsi transisi halus (fade + slide)
+        function transitionToPage(current, next, callback){
+            current.classList.add('fade-out');
             setTimeout(() => {
-                // Di tengah flip, ganti halaman
-                currentPage.classList.add('hidden');
-                nextPage.classList.remove('hidden');
-                // Setelah setengah flip, balikkan lagi
+                current.classList.add('hidden');
+                current.classList.remove('fade-out');
+                next.classList.remove('hidden');
+                next.classList.add('fade-in');
                 setTimeout(() => {
-                    bookCard.classList.remove('flip');
-                    setTimeout(() => {
-                        isFlipping = false;
-                        if(callback) callback();
-                    }, 300);
-                }, 150);
-            }, 300);
+                    next.classList.remove('fade-in');
+                    if(callback) callback();
+                }, 400);
+            }, 400);
         }
 
         // Next 1 -> 2
         next1.addEventListener('click', ()=>{
             if(!musicStarted){ bgMusic.play(); musicStarted=true; musicIcon.innerHTML='🔇'; }
-            flipToPage(page1, page2);
+            transitionToPage(page1, page2);
         });
 
-        // Buka amplop dengan animasi stiker 2 detik
+        // Buka amplop dengan animasi stiker 2 detik (ringan)
         openEnvelopeBtn.addEventListener('click', ()=>{
             envelope.classList.add('open');
             openEnvelopeBtn.style.display = 'none';
-            // Tampilkan animasi stiker
+            // Tampilkan stiker animasi
             stickerAnimDiv.style.display = 'block';
             stickerAnimDiv.innerHTML = '';
             const emojiList = ['❤️','💖','🌸','🐼','💕','✨','🌹','😘','🎀','🐣','💌','🎁'];
-            for(let i=0;i<30;i++){
+            // 15 burst
+            for(let i=0;i<15;i++){
                 let burst = document.createElement('div');
                 burst.className = 'sticker-burst';
                 burst.innerHTML = emojiList[Math.floor(Math.random()*emojiList.length)];
                 burst.style.left = Math.random()*80+10+'%';
-                burst.style.top = Math.random()*80+10+'%';
+                burst.style.top = Math.random()*70+15+'%';
                 burst.style.fontSize = (Math.random()*20+16)+'px';
-                burst.style.animationDuration = (Math.random()*0.6+0.5)+'s';
+                burst.style.animationDuration = (Math.random()*0.5+0.5)+'s';
                 stickerAnimDiv.appendChild(burst);
             }
-            for(let i=0;i<20;i++){
+            // 10 float
+            for(let i=0;i<10;i++){
                 let fly = document.createElement('div');
                 fly.className = 'sticker-float';
                 fly.innerHTML = emojiList[Math.floor(Math.random()*emojiList.length)];
                 fly.style.left = Math.random()*100+'%';
                 fly.style.bottom = '0px';
                 fly.style.fontSize = (Math.random()*20+16)+'px';
-                fly.style.animationDuration = (Math.random()*1.2+0.8)+'s';
+                fly.style.animationDuration = (Math.random()*1+1)+'s';
                 stickerAnimDiv.appendChild(fly);
             }
             setTimeout(()=>{
                 stickerAnimDiv.style.display = 'none';
                 stickerAnimDiv.innerHTML = '';
                 letterDiv.style.display = 'block';
-            },2000);
+            }, 2000);
         });
 
         // Next 2 -> 3
         next2.addEventListener('click', ()=>{
-            flipToPage(page2, page3);
+            transitionToPage(page2, page3);
         });
 
         // Buka kado
@@ -487,12 +474,12 @@
             giftBox.style.opacity = '0';
             setTimeout(()=>{
                 photoContainer.style.display = 'block';
-            },300);
+            }, 300);
         });
 
         // Next 3 -> 4
         next3.addEventListener('click', ()=>{
-            flipToPage(page3, page4);
+            transitionToPage(page3, page4);
         });
 
         // Beruang love
@@ -509,20 +496,21 @@
             anim3d.style.display = 'block';
             setTimeout(()=>{
                 finalTextSpan.style.display = 'block';
-            },3000);
+            }, 3000);
         });
 
-        // Efek 3D card mengikuti gerakan mouse (ringan)
-        const cardInner = document.querySelector('.card-inner');
+        // Efek mouse ringan pada card (opsional, tidak berat)
+        const card = document.querySelector('.card');
+        let mouseX = 0, mouseY = 0;
         document.body.addEventListener('mousemove', (e)=>{
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-            cardInner.style.transform = `rotateX(${y*5}deg) rotateY(${x*5}deg)`;
+            mouseX = (e.clientX / window.innerWidth - 0.5)*6;
+            mouseY = (e.clientY / window.innerHeight - 0.5)*6;
+            card.style.transform = `rotateX(${mouseY}deg) rotateY(${mouseX}deg)`;
         });
         document.body.addEventListener('mouseleave', ()=>{
-            cardInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
         });
     })();
 </script>
 </body>
-    </html>
+                </html>
