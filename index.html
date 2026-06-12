@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Untuk Tina - Just friend aku ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Untuk Tina ❤️ Premium Cinematic</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -45,7 +45,7 @@
             z-index: 1;
         }
 
-        /* Hujan emoji (ringan) */
+        /* Hujan emoji ringan */
         .rain-emoji {
             position: fixed;
             top: 0;
@@ -70,11 +70,11 @@
         .card {
             position: relative;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(20px);
             border-radius: 70px;
             padding: 30px 25px;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             box-shadow: 0 30px 50px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.3);
@@ -82,7 +82,7 @@
             transform-style: preserve-3d;
         }
 
-        /* Transisi halaman cinematic (fade + scale + blur) */
+        /* Transisi cinematic (fade + scale + blur) */
         .page {
             transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), filter 0.5s;
             will-change: opacity, transform, filter;
@@ -106,18 +106,17 @@
         .btn {
             background: linear-gradient(135deg, #ff69b4, #ff1493, #1e90ff);
             border: none;
-            padding: 16px 40px;
-            font-size: 1.4rem;
+            padding: 14px 35px;
+            font-size: 1.2rem;
             font-weight: bold;
             border-radius: 60px;
             color: white;
             cursor: pointer;
-            display: block;
-            margin: 30px auto 20px;
+            display: inline-block;
+            margin: 20px auto 10px;
             width: fit-content;
             box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 10px rgba(255,105,180,0.5);
             transition: transform 0.15s ease, box-shadow 0.15s ease;
-            will-change: transform;
         }
         .btn:active {
             transform: scale(0.96);
@@ -146,6 +145,7 @@
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
             transition: transform 0.3s ease, filter 0.2s;
             transform-style: preserve-3d;
+            display: inline-block;
         }
         .envelope-icon:hover {
             transform: scale(1.05) translateZ(20px);
@@ -182,14 +182,14 @@
             box-shadow: 0 20px 30px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,255,255,0.5);
             transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
             transform-style: preserve-3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
         .gift-box::after {
             content: "🎁";
             font-size: 4rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
         .gift-box.open {
             transform: scale(1.05) rotateY(10deg);
@@ -305,14 +305,14 @@
 
 <div class="card" id="mainCard">
     <!-- Page 1: Welcome -->
-    <div id="page1" class="page" style="text-align: center; opacity: 1; transform: translateY(0);">
+    <div id="page1" class="page" style="text-align: center; opacity: 1;">
         <div>
             <span class="sticker">🐼💖</span>
             <span class="sticker">🌸🌼</span>
             <span class="sticker">💌✨</span>
             <span class="sticker">😘🥰</span>
         </div>
-        <h1 style="color: white; font-size: 2rem; margin: 20px 0; text-shadow: 0 0 10px rgba(0,0,0,0.5);">✨ wellcome tinaa sayang ✨</h1>
+        <h1 style="color: white; font-size: 2rem; margin: 20px 0;">✨ Welcome Tinaa Sayang ✨</h1>
         <div>
             <span class="sticker">🫶💕</span>
             <span class="sticker">🐣💛</span>
@@ -325,16 +325,8 @@
     <div id="page2" class="page hidden" style="text-align: center;">
         <div><span class="sticker">💌✨</span><span class="sticker">📦🎁</span><span class="sticker">💘💖</span></div>
         <div class="envelope-icon" id="envelopeIcon">💌</div>
-        <div id="openEnvelopeBtn" class="btn">💌 buka ini ya sayang 💌</div>
+        <button id="openEnvelopeBtn" class="btn">💌 buka ini ya sayang 💌</button>
         <div id="letterContainer" style="display:none; margin-top: 20px;"></div>
-        <div id="letterContent" style="display:none;">
-            <div class="message-box">
-                <span class="sticker">📜💌</span> <span class="sticker">🐼💕</span>
-                <p>ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
-                <span class="sticker">😘💖</span> <span class="sticker">🌸🌺</span>
-            </div>
-            <button id="next2" class="btn">✨ Next ✨</button>
-        </div>
     </div>
 
     <!-- Page 3: Kado + foto -->
@@ -350,7 +342,7 @@
         </div>
     </div>
 
-    <!-- Page 4: Beruang love -->
+    <!-- Page 4: Beruang love & selesai -->
     <div id="page4" class="page hidden" style="text-align: center;">
         <div><span class="sticker">🐻‍❄️❤️</span><span class="sticker">🧸💕</span></div>
         <div class="bear-love" id="bearLove">🐻‍❄️❤️</div>
@@ -366,6 +358,7 @@
             <div class="heart-3d"></div>
             <p id="finalText" style="color:white; margin-top:20px; display:none;">Yeayy selesai sayangg 🎉💖</p>
         </div>
+        <footer>💖 Dari Ganny untuk Tina 💖</footer>
     </div>
 </div>
 
@@ -464,8 +457,7 @@
         const page3 = document.getElementById('page3');
         const page4 = document.getElementById('page4');
         const next1 = document.getElementById('next1');
-        const next2 = document.getElementById('next2');
-        const next3 = document.getElementById('next3');
+        const next3Btn = document.getElementById('next3');
         const openEnvelopeBtn = document.getElementById('openEnvelopeBtn');
         const envelopeIcon = document.getElementById('envelopeIcon');
         const letterContainer = document.getElementById('letterContainer');
@@ -506,7 +498,9 @@
             paperDiv.innerHTML = `
                 <div style="text-align:center;">
                     <span class="sticker">📜💌</span> <span class="sticker">🐼💕</span>
-                    <p style="margin-top:10px;">ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe, btw maaff yaa kalo jelek, oh iya aku selalu kasih tau kalo kamu mau cerita bisa langsung cerita aja ya, gausah malu sayang, apapun ceritanya dan kapanpun waktu nya aku pasti dengerin dan slalu ada buat kamu cantikkk</p>
+                    <p style="margin-top:10px;">ekhm, hayy sayang apa kabar? akuu buatin lagi nih hhehe.<br>
+                    maaff yaa kalau masih ada kurangnya. Kalau kamu mau cerita, langsung cerita aja ya.<br>
+                    Apapun ceritanya dan kapanpun waktunya, aku bakal dengerin. 🌸✨</p>
                     <span class="sticker">😘💖</span> <span class="sticker">🌸🌺</span>
                     <button id="next2AfterPaper" class="btn" style="margin-top:15px;">✨ Next ✨</button>
                 </div>
@@ -545,7 +539,7 @@
         });
 
         // Next 3 -> 4
-        next3.addEventListener('click', ()=>{
+        next3Btn.addEventListener('click', ()=>{
             transitionToPage(page3, page4);
         });
 
@@ -566,7 +560,7 @@
             }, 3000);
         });
 
-        // Efek mouse 3D pada card
+        // Efek 3D pada card mengikuti gerakan mouse (ringan)
         const card = document.querySelector('.card');
         let mouseX = 0, mouseY = 0;
         document.body.addEventListener('mousemove', (e)=>{
