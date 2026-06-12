@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Untuk Tina - 3D Mewah ❤️</title>
+    <title>Untuk Tina - Just friend aku ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -16,15 +16,16 @@
         body {
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
-            background: radial-gradient(circle at 30% 20%, #1e3c72, #2b1e4a, #ff4d6d, #8b4513);
+            background: radial-gradient(circle at 20% 30%, #1a1a2e, #16213e, #0f3460, #e94560);
             background-size: 200% 200%;
-            animation: bgWave 10s ease infinite;
+            animation: bgWave 12s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             perspective: 1200px;
             overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes bgWave {
@@ -33,7 +34,18 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Hujan emoji ringan (30 butir) */
+        /* Particle canvas (floating hearts & stars) */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Hujan emoji (ringan) */
         .rain-emoji {
             position: fixed;
             top: 0;
@@ -41,7 +53,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 2;
         }
         .rain-emoji span {
             position: absolute;
@@ -54,7 +66,7 @@
             to { transform: translateY(100vh); }
         }
 
-        /* Kartu utama 3D */
+        /* Kartu utama glassmorphism mewah */
         .card {
             position: relative;
             z-index: 10;
@@ -70,25 +82,27 @@
             transform-style: preserve-3d;
         }
 
-        /* Transisi halaman halus */
+        /* Transisi halaman cinematic (fade + scale + blur) */
         .page {
-            transition: opacity 0.4s cubic-bezier(0.2,0.9,0.4,1.1), transform 0.4s cubic-bezier(0.2,0.9,0.4,1.1);
-            will-change: opacity, transform;
+            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), filter 0.5s;
+            will-change: opacity, transform, filter;
         }
         .page.hidden {
             display: none;
         }
         .fade-out {
             opacity: 0 !important;
-            transform: translateY(15px) scale(0.98) !important;
+            transform: translateY(20px) scale(0.96) !important;
+            filter: blur(4px) !important;
             pointer-events: none;
         }
         .fade-in {
             opacity: 1 !important;
             transform: translateY(0) scale(1) !important;
+            filter: blur(0) !important;
         }
 
-        /* Tombol mewah di tengah */
+        /* Tombol premium */
         .btn {
             background: linear-gradient(135deg, #ff69b4, #ff1493, #1e90ff);
             border: none;
@@ -101,7 +115,7 @@
             display: block;
             margin: 30px auto 20px;
             width: fit-content;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 10px rgba(255,105,180,0.5);
             transition: transform 0.15s ease, box-shadow 0.15s ease;
             will-change: transform;
         }
@@ -109,7 +123,7 @@
             transform: scale(0.96);
         }
 
-        /* Stiker bergerak halus */
+        /* Stiker bergerak */
         .sticker {
             display: inline-block;
             font-size: 2rem;
@@ -123,24 +137,22 @@
             to { transform: translateY(-8px) rotate(3deg); }
         }
 
-        /* AMPLOP BENTUK 💌 (Emoji besar) */
+        /* Amplop ikon 💌 dengan efek 3D */
         .envelope-icon {
             font-size: 8rem;
             text-align: center;
             cursor: pointer;
             margin: 20px 0;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
             transition: transform 0.3s ease, filter 0.2s;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
             transform-style: preserve-3d;
         }
         .envelope-icon:hover {
             transform: scale(1.05) translateZ(20px);
-        }
-        .envelope-icon:active {
-            transform: scale(0.96);
+            filter: drop-shadow(0 0 20px #ff69b4);
         }
 
-        /* Animasi kertas keluar dari amplop */
+        /* Surat yang keluar dari amplop secara fisik (3D) */
         .letter-paper {
             background: #fffef7;
             border-radius: 30px;
@@ -148,17 +160,17 @@
             margin-top: 20px;
             text-align: left;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transform-origin: top center;
-            animation: paperPop 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+            transform-origin: center;
+            animation: paperPop 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
             will-change: transform, opacity;
         }
         @keyframes paperPop {
-            0% { opacity: 0; transform: scale(0.8) translateY(50px); }
-            80% { opacity: 1; transform: scale(1.02) translateY(-5px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+            0% { opacity: 0; transform: scale(0.5) rotateX(-30deg) translateY(80px); }
+            60% { opacity: 1; transform: scale(1.02) rotateX(5deg) translateY(-5px); }
+            100% { opacity: 1; transform: scale(1) rotateX(0deg) translateY(0); }
         }
 
-        /* Kotak kado 3D */
+        /* Kotak kado dengan efek cahaya */
         .gift-box {
             width: 180px;
             height: 180px;
@@ -167,8 +179,8 @@
             position: relative;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
-            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,255,255,0.5);
+            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
             transform-style: preserve-3d;
         }
         .gift-box::after {
@@ -182,9 +194,10 @@
         .gift-box.open {
             transform: scale(1.05) rotateY(10deg);
             background: #ffd966;
+            box-shadow: 0 0 30px rgba(255,215,0,0.8);
         }
 
-        /* Foto dengan efek 3D dan emoji berputar */
+        /* Foto dengan efek apung dan glow */
         .photo-wrapper {
             position: relative;
             margin: 20px auto;
@@ -195,8 +208,7 @@
             max-width: 280px;
             border-radius: 40px;
             display: block;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
-            border: 3px solid white;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4), 0 0 0 3px white;
             transition: transform 0.3s ease;
             animation: floatPhoto 3s infinite alternate;
             will-change: transform;
@@ -210,10 +222,11 @@
             font-size: 1.6rem;
             animation: orbit 3s linear infinite;
             pointer-events: none;
+            filter: drop-shadow(0 0 5px gold);
         }
         @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
         }
 
         /* Beruang love 3D */
@@ -232,7 +245,7 @@
             50%{ transform: translateY(-12px); }
         }
 
-        /* Heart 3D */
+        /* Heart 3D berotasi */
         .heart-3d {
             width: 100px;
             height: 100px;
@@ -257,6 +270,7 @@
             font-size: 1rem;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .music-btn {
@@ -273,6 +287,7 @@
             font-weight: bold;
             display: flex;
             gap: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         footer {
@@ -284,6 +299,8 @@
     </style>
 </head>
 <body>
+
+<canvas id="particleCanvas"></canvas>
 <div class="rain-emoji" id="rainEmoji"></div>
 
 <div class="card" id="mainCard">
@@ -295,7 +312,7 @@
             <span class="sticker">💌✨</span>
             <span class="sticker">😘🥰</span>
         </div>
-        <h1 style="color: white; font-size: 2rem; margin: 20px 0;">✨ wellcome tinaa sayang ✨</h1>
+        <h1 style="color: white; font-size: 2rem; margin: 20px 0; text-shadow: 0 0 10px rgba(0,0,0,0.5);">✨ wellcome tinaa sayang ✨</h1>
         <div>
             <span class="sticker">🫶💕</span>
             <span class="sticker">🐣💛</span>
@@ -304,7 +321,7 @@
         <button id="next1" class="btn">📬 Next 📬</button>
     </div>
 
-    <!-- Page 2: Amplop ikon 💌 -->
+    <!-- Page 2: Amplop 💌 -->
     <div id="page2" class="page hidden" style="text-align: center;">
         <div><span class="sticker">💌✨</span><span class="sticker">📦🎁</span><span class="sticker">💘💖</span></div>
         <div class="envelope-icon" id="envelopeIcon">💌</div>
@@ -320,14 +337,13 @@
         </div>
     </div>
 
-    <!-- Page 3: Kotak kado + foto bergerak -->
+    <!-- Page 3: Kado + foto -->
     <div id="page3" class="page hidden" style="text-align: center;">
         <div><span class="sticker">🎀🎁</span><span class="sticker">💝💕</span></div>
         <div id="giftBox" class="gift-box"></div>
         <div id="photoContainer" style="display:none;">
             <div class="photo-wrapper" id="photoWrapper">
                 <img src="foto.jpg" alt="Foto Tina" class="photo" onerror="this.src='https://placehold.co/400x400?text=Foto+Tina'">
-                <!-- Emoji berputar akan ditambahkan via JS -->
             </div>
             <div class="message-box">cantik banget sih just friend akuuu 😍💖</div>
             <button id="next3" class="btn">✨ Next ✨</button>
@@ -360,7 +376,60 @@
 
 <script>
     (function(){
-        // Hujan emoji ringan
+        // ==================== PARTICLE EFFECT (Floating hearts) ====================
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        const PARTICLE_COUNT = 35;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class HeartParticle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 15 + 8;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.char = ['❤️','💖','💕','💘'][Math.floor(Math.random()*4)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y -= this.speedY;
+                if (this.y < -20) this.y = height + 20;
+                if (this.x < -20) this.x = width + 20;
+                if (this.x > width + 20) this.x = -20;
+            }
+            draw() {
+                ctx.font = `${this.size}px "Segoe UI Emoji"`;
+                ctx.globalAlpha = this.opacity;
+                ctx.fillText(this.char, this.x, this.y);
+            }
+        }
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new HeartParticle());
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ==================== HUJAN EMOJI (ringan) ====================
         const rainContainer = document.getElementById('rainEmoji');
         const emojis = ['❤️','💖','🌸','🐼','💕','✨','🌹','😘','🎀'];
         for(let i=0;i<30;i++){
@@ -374,7 +443,7 @@
             rainContainer.appendChild(drop);
         }
 
-        // Musik
+        // ==================== MUSIK ====================
         const bgMusic = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         let musicStarted = false;
@@ -389,7 +458,7 @@
         }
         document.getElementById('musicControl').addEventListener('click', toggleMusic);
 
-        // Elemen
+        // ==================== TRANSISI HALAMAN ====================
         const page1 = document.getElementById('page1');
         const page2 = document.getElementById('page2');
         const page3 = document.getElementById('page3');
@@ -397,10 +466,9 @@
         const next1 = document.getElementById('next1');
         const next2 = document.getElementById('next2');
         const next3 = document.getElementById('next3');
-        const envelopeIcon = document.getElementById('envelopeIcon');
         const openEnvelopeBtn = document.getElementById('openEnvelopeBtn');
+        const envelopeIcon = document.getElementById('envelopeIcon');
         const letterContainer = document.getElementById('letterContainer');
-        const letterContentDiv = document.getElementById('letterContent');
         const giftBox = document.getElementById('giftBox');
         const photoContainer = document.getElementById('photoContainer');
         const bearLove = document.getElementById('bearLove');
@@ -409,7 +477,6 @@
         const anim3d = document.getElementById('anim3dContainer');
         const finalTextSpan = document.getElementById('finalText');
 
-        // Transisi halus
         function transitionToPage(current, next, callback){
             current.classList.add('fade-out');
             setTimeout(() => {
@@ -420,8 +487,8 @@
                 setTimeout(() => {
                     next.classList.remove('fade-in');
                     if(callback) callback();
-                }, 400);
-            }, 400);
+                }, 500);
+            }, 500);
         }
 
         // Next 1 -> 2
@@ -430,12 +497,10 @@
             transitionToPage(page1, page2);
         });
 
-        // Buka amplop: animasi kertas keluar (tanpa loading teks, langsung efek paperPop)
+        // Buka amplop: surat keluar secara fisik (animasi 3D)
         openEnvelopeBtn.addEventListener('click', ()=>{
-            // Sembunyikan amplop dan tombol buka
             envelopeIcon.style.display = 'none';
             openEnvelopeBtn.style.display = 'none';
-            // Buat elemen kertas dengan animasi
             const paperDiv = document.createElement('div');
             paperDiv.className = 'letter-paper';
             paperDiv.innerHTML = `
@@ -448,37 +513,28 @@
             `;
             letterContainer.appendChild(paperDiv);
             letterContainer.style.display = 'block';
-            // Event untuk tombol Next di dalam kertas
             document.getElementById('next2AfterPaper').addEventListener('click', ()=>{
                 transitionToPage(page2, page3);
             });
         });
 
-        // Buka kotak kado: muncul foto dengan emoji berputar
+        // Buka kado: foto muncul dengan emoji orbit
         giftBox.addEventListener('click', ()=>{
             giftBox.classList.add('open');
             giftBox.style.opacity = '0';
             setTimeout(()=>{
                 photoContainer.style.display = 'block';
-                // Tambahkan emoji berputar di sekitar foto
                 const wrapper = document.getElementById('photoWrapper');
-                const emojisOrbit = ['❤️','💖','🌸','🐼','💕','✨','🌹','😘'];
+                const orbitEmojis = ['❤️','💖','🌸','🐼','💕','✨','🌹','😘'];
                 for(let i=0; i<8; i++){
                     let em = document.createElement('div');
                     em.className = 'floating-emoji';
-                    em.innerHTML = emojisOrbit[i % emojisOrbit.length];
-                    em.style.animationDelay = (i * 0.3) + 's';
-                    em.style.left = '50%';
-                    em.style.top = '50%';
-                    em.style.transformOrigin = '0 0';
-                    // Posisi orbit diatur dengan keyframe, kita set posisi absolut relatif terhadap wrapper
-                    wrapper.style.position = 'relative';
+                    em.innerHTML = orbitEmojis[i % orbitEmojis.length];
                     em.style.position = 'absolute';
                     em.style.left = 'calc(50% - 15px)';
                     em.style.top = 'calc(50% - 15px)';
-                    // Orbit dengan radius
-                    const radius = 70;
                     const angle = (i * 45) * Math.PI/180;
+                    const radius = 70;
                     const x = radius * Math.cos(angle);
                     const y = radius * Math.sin(angle);
                     em.style.transform = `translate(${x}px, ${y}px)`;
@@ -488,7 +544,7 @@
             }, 300);
         });
 
-        // Next 2 -> 3 sudah ditangani di dalam event paper, tapi kita perlu juga untuk next dari page3 ke page4
+        // Next 3 -> 4
         next3.addEventListener('click', ()=>{
             transitionToPage(page3, page4);
         });
@@ -510,7 +566,7 @@
             }, 3000);
         });
 
-        // Efek mouse 3D pada card (ringan)
+        // Efek mouse 3D pada card
         const card = document.querySelector('.card');
         let mouseX = 0, mouseY = 0;
         document.body.addEventListener('mousemove', (e)=>{
